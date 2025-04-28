@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Ticket_Project.Models.Enums;
 using Ticket_Project.Models;
+using Ticket_Project.Repositories;
 
 namespace Ticket_Project.Services
 {

@@ -1,4 +1,7 @@
 ﻿using System;
+using Ticket_Project.Models.Enums;
+using Ticket_Project.Repositories;
+using Ticket_Project.Services;
 
 namespace Ticket_Project
 {

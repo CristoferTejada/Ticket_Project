@@ -4,6 +4,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using Ticket_Project.Models.Enums;
 using Ticket_Project.Models.Interfaces;
 
 namespace Ticket_Project.Models

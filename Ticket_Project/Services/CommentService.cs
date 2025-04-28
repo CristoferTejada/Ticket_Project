@@ -24,7 +24,7 @@ namespace Ticket_Project.Services
             var ticket = _ticketRepository.GetById(ticketId);
             if (ticket == null)
             {
-                return null; // O podrías manejar esto de otra manera (e.g., retornar null, lanzar excepción)
+                return null;
             }
 
             var newComment = new Comment
@@ -36,7 +36,7 @@ namespace Ticket_Project.Services
 
             _commentRepository.Add(newComment);
             ticket.Comments.Add(newComment);
-            _ticketRepository.Update(ticket); // Actualiza el ticket con el nuevo comentario
+            _ticketRepository.Update(ticket);
 
             return newComment;
         }

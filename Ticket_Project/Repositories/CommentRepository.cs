@@ -4,42 +4,41 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Ticket_Project.Models;
+using Ticket_Project.Repositories;
 
 namespace Ticket_Project.Repositories
 {
-    internal class CommentRepository
+    public class CommentService(CommentRepository commentRepository, TicketRepository ticketRepository)
     {
-        private readonly List<Comment> _comments = new List<Comment>();
-        private int _nextId = 1;
+        private readonly CommentRepository _commentRepository = commentRepository;
+        private readonly TicketRepository _ticketRepository = ticketRepository;
 
-        public void Add(Comment comment)
+        public Comment CreateComment(int ticketId, string author, string text)
         {
-            comment.Id = _nextId++;
-            _comments.Add(comment);
-        }
-
-        public Comment GetById(int id)
-        {
-            return _comments.FirstOrDefault(c => c.Id == id);
-        }
-
-        public IEnumerable<Comment> GetAll()
-        {
-            return _comments;
-        }
-
-        public void Update(Comment comment)
-        {
-            var existingCommentIndex = _comments.FindIndex(c => c.Id == comment.Id);
-            if (existingCommentIndex != -1)
+            var ticket = _ticketRepository.GetById(ticketId);
+            if (ticket == null)
             {
-                _comments[existingCommentIndex] = comment;
+                return null;
             }
+
+            var newComment = new Comment
+            {
+                Author = author,
+                Text = text,
+                CreatedDate = DateTime.Now
+            };
+
+            _commentRepository.Add(newComment);
+            ticket.Comments.Add(newComment);
+            _ticketRepository.Update(ticket);
+
+            return newComment;
         }
 
-        public void Delete(int id)
+        public List<Comment> GetCommentsByTicketId(int ticketId)
         {
-            _comments.RemoveAll(c => c.Id == id);
+            var ticket = _ticketRepository.GetById(ticketId);
+            return ticket?.Comments ?? new List<Comment>();
         }
     }
 }

@@ -7,9 +7,10 @@ using Ticket_Project.Models.Enums;
 using Ticket_Project.Models;
 using Ticket_Project.Repositories;
 
+
 namespace Ticket_Project.Services
 {
-    internal class TicketService
+    public class TicketService
     {
         private readonly TicketRepository _ticketRepository;
         private readonly DeveloperRepository _developerRepository;

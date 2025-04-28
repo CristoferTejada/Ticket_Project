@@ -7,7 +7,7 @@ using Ticket_Project.Models;
 
 namespace Ticket_Project.Repositories
 {
-    internal class DeveloperRepository
+    public class DeveloperRepository
     {
         private readonly List<Developer> _developers = new List<Developer>();
         private int _nextId = 1;

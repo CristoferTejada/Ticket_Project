@@ -12,7 +12,11 @@ namespace Ticket_Project.Repositories
     {
         private readonly CommentRepository _commentRepository = commentRepository;
         private readonly TicketRepository _ticketRepository = ticketRepository;
-
+        public List<Comment> GetCommentsByTicketId(int ticketId)
+        {
+            var ticket = _ticketRepository.GetById(ticketId);
+            return ticket?.Comments ?? new List<Comment>();
+        }
         public Comment CreateComment(int ticketId, string author, string text)
         {
             var ticket = _ticketRepository.GetById(ticketId);
@@ -35,10 +39,6 @@ namespace Ticket_Project.Repositories
             return newComment;
         }
 
-        public List<Comment> GetCommentsByTicketId(int ticketId)
-        {
-            var ticket = _ticketRepository.GetById(ticketId);
-            return ticket?.Comments ?? new List<Comment>();
-        }
+        
     }
 }
